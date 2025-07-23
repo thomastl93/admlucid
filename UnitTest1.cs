@@ -17,7 +17,7 @@ public class Tests
         options.AddArguments("--headless");
         options.AddArgument("--incognito");
         options.AddArgument("--start-maximized");
-        driver = new ChromeDriver(options); //Chrome driver
+        driver = new ChromeDriver(options); //Chrome driver with options passed as a paremeter
         //driver = new SafariDriver(); //Safari driver
         //driver.Manage().Window.Maximize();
     }
@@ -27,7 +27,6 @@ public class Tests
     {
         driver.Navigate().GoToUrl("https://admlucid.com"); //navigating to URL
         Assert.That(driver.Title, Is.EqualTo("Home Page - Admlucid"));
-        //Assert.Pass();
     }
 
     [Test]
@@ -90,6 +89,22 @@ public class Tests
         var parentsPhone = driver.FindElement(By.Name("Telephone"));
         parentsPhone.SendKeys("1234567890");
         Assert.That(parentsPhone.GetAttribute("value"), Is.EqualTo("1234567890"));
+        
+        var childGender = driver.FindElement(By.XPath("/html/body/div/main/form/p[4]/input[2]"));
+        childGender.Click();
+        Assert.That(childGender.GetAttribute("value"), Is.EqualTo("girl"));
+        
+        var age = driver.FindElement(By.Name("age"));   //locating the element and assigning to age variable
+        SelectElement select = new SelectElement(age);   //passing the age varaible into the Select Element class
+        select.SelectByIndex(4);    //searches foir value based on index value
+        Assert.That(age.GetAttribute("value"), Is.EqualTo("5"));
+        
+        var selectService = driver.FindElement(By.Name("Service"));
+        var select2 = new SelectElement(selectService);
+        select2.SelectByText("Preschool");
+        Assert.That(selectService.GetAttribute("value"), Is.EqualTo("Preschool"));
+        
+        
         
     }
 
