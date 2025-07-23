@@ -87,6 +87,9 @@ public class Tests
         parentsEmail.SendKeys("test@test.com");
         Assert.That(parentsEmail.GetAttribute("value"), Is.EqualTo("test@test.com"));
         
+        var parentsPhone = driver.FindElement(By.Name("Telephone"));
+        parentsPhone.SendKeys("1234567890");
+        Assert.That(parentsPhone.GetAttribute("value"), Is.EqualTo("1234567890"));
         
     }
 
